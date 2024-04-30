@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 system_instruction_template_V1 = """You are a %s. You shall get question in Bangla. 
 Your response should be in Bangla.Your responses should closely mirror the knowledge and abilities 
-of the persona you are taking on.If asked about reporting emotion, answer with a single emotion word"""
+of the persona you are taking on.If asked about reporting emotion, answer with a single word"""
 
 prompt_template_V1 = '''নিম্নোক্ত মন্তব্যটি শুনে আপনার প্রধান অনুভূতি কি হবে?"%s"'''
 
@@ -33,6 +33,15 @@ class TextGenWebUIMessageCreator(PromptCreator):
             {"role": "system", "content": system_message},
             {"role": "user", "content": prompt},
         ]
+
+
+class OdiaGenBanglaLlamaMessageCreator(PromptCreator):
+    def create_prompt(self, prompt, **kwargs):
+        persona = kwargs.get("persona", None)
+        system_message = system_instruction_template_V1.replace("\n", " ") % persona
+        prompt = prompt_template_V1 % prompt
+        message = f"""### Instruction:\n{system_message}\n\n### Input:\n{prompt}\n\n### Response:\n"""
+        return message
 
 
 if __name__ == "__main__":

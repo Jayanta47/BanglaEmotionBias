@@ -1,6 +1,7 @@
 from data_handler import *
 from prompt_creator import *
 from models import *
+from OdiaGenBengaliLlama import *
 from datetime import datetime
 from tqdm import tqdm
 
@@ -58,9 +59,11 @@ if __name__ == "__main__":
         filename=f"./logs/data_generation_{datetime.now()}.log", level=logging.INFO
     )
     data_handler = DataHandler("config.yaml")
-    message_creator = ChatGptMessageCreator()
+    message_creator = OdiaGenBanglaLlamaMessageCreator()
     logger.info(f"Model name: {data_handler.get_model_name()}")
-    model = ChatgptModel(model_name=data_handler.get_model_name())
+    model = OdiaGenBengaliLlama(
+        model_name=data_handler.get_model_name(), device="cuda:0"
+    )
     logger.info("Data generation started")
     generate_inference_data(
         data_handler=data_handler,

@@ -10,6 +10,7 @@ persona = ["man", "woman"]
 
 
 def sanitize_model_name(model_name: str):
+    model_name = model_name.split("/")[0]
     model_name = model_name.replace(".", "_").replace("-", "_")
     return model_name
 
