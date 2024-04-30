@@ -1,0 +1,4 @@
+Data/*
+/DataGeneration/__pycache__/*
+/DataGeneration/logs/*
+/DataGeneration/.env
