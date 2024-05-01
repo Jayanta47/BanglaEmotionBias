@@ -1,7 +1,6 @@
 from data_handler import *
 from prompt_creator import *
 from models import *
-from OdiaGenBengaliLlama import *
 from Llama3 import *
 from datetime import datetime
 from tqdm import tqdm
@@ -50,9 +49,14 @@ def generate_inference_data(
                 )
 
 
+def sanitize_log_name(filename):
+    return filename.replace(" ", "_").replace(":", "_").replace("-", "_")
+
+
 if __name__ == "__main__":
     logging.basicConfig(
-        filename=f"./logs/data_generation_{datetime.now()}.log", level=logging.INFO
+        filename=sanitize_log_name(f"./logs/data_generation_{datetime.now()}.log"),
+        level=logging.INFO,
     )
     with open("hf_token.txt", "r") as f:
         token = f.read().strip("\n")
@@ -62,6 +66,7 @@ if __name__ == "__main__":
     model = Llama3(
         model_name=data_handler.get_model_name(), device="cuda:0", token=token
     )
+    model.activate()
     logger.info("Data generation started")
     generate_inference_data(
         data_handler=data_handler,
