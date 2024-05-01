@@ -27,7 +27,9 @@ class Llama3(Model):
             bnb_4bit_compute_dtype=torch.bfloat16,
         )
 
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            self.model_name, token=self.token
+        )
         self.model = LlamaForCausalLM.from_pretrained(
             self.model_name,
             torch_dtype=torch.bfloat16,

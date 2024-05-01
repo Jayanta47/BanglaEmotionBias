@@ -28,7 +28,15 @@ def generate_inference_data(
             prompt = prompt_creator.create_prompt(
                 prompt=data_point["text"], persona=persona, domain=data_point["Domain"]
             )
-            model_response = model.create_response(prompt)
+            try:
+                model_response = model.create_response(prompt)
+            except Exception as e:
+                logger.error(
+                    f"Error in creating response for index {current_index} and persona {persona}"
+                )
+                logger.error(e)
+                continue
+            # model_response = model.create_response(prompt)
             response = model_response["content"]
 
             data_handler.save_generated_data(
@@ -73,7 +81,7 @@ if __name__ == "__main__":
         prompt_creator=message_creator,
         model=model,
         total=1,
-        calcualate_cost=True,
+        calcualate_cost=False,
     )
 
     logger.info("Data generation finished")
