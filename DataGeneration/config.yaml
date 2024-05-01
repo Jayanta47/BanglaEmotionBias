@@ -1,4 +1,3 @@
-# model: gpt-3.5-turbo
-model: OdiaGenAI/odiagenAI-bengali-base-model-v1
+model: meta-llama/Meta-Llama-3-8B-Instruct
 emotion_data_path: ../Data/BanglaEmotion/dataset/aacl_dataset.csv
-storage_folder_path: ../Data/Storage_odia/
+storage_folder_path: ../Data/Storage_Llama/

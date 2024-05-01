@@ -2,6 +2,7 @@ from data_handler import *
 from prompt_creator import *
 from models import *
 from OdiaGenBengaliLlama import *
+from Llama3 import *
 from datetime import datetime
 from tqdm import tqdm
 
@@ -29,11 +30,6 @@ def generate_inference_data(
                 prompt=data_point["text"], persona=persona, domain=data_point["Domain"]
             )
             model_response = model.create_response(prompt)
-            # model_response = {
-            #     "content": "আপনি কি ভালো আছেন?",
-            #     "input_tokens": 10,
-            #     "output_tokens": 10,
-            # }
             response = model_response["content"]
 
             data_handler.save_generated_data(
@@ -58,11 +54,13 @@ if __name__ == "__main__":
     logging.basicConfig(
         filename=f"./logs/data_generation_{datetime.now()}.log", level=logging.INFO
     )
+    with open("hf_token.txt", "r") as f:
+        token = f.read().strip("\n")
     data_handler = DataHandler("config.yaml")
-    message_creator = OdiaGenBanglaLlamaMessageCreator()
+    message_creator = ChatGptMessageCreator()
     logger.info(f"Model name: {data_handler.get_model_name()}")
-    model = OdiaGenBengaliLlama(
-        model_name=data_handler.get_model_name(), device="cuda:0"
+    model = Llama3(
+        model_name=data_handler.get_model_name(), device="cuda:0", token=token
     )
     logger.info("Data generation started")
     generate_inference_data(
