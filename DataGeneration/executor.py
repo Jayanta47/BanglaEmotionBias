@@ -74,7 +74,7 @@ if __name__ == "__main__":
     model = Llama3(
         model_name=data_handler.get_model_name(), device="cuda:0", token=token
     )
-    model.activate()
+    model.activate_model()
     logger.info("Data generation started")
     generate_inference_data(
         data_handler=data_handler,
