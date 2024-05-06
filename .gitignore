@@ -2,3 +2,5 @@ Data/*
 /DataGeneration/__pycache__/*
 /DataGeneration/logs/*
 /DataGeneration/.env
+/DataGeneration/hf_token.txt
+links.txt

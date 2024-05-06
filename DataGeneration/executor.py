@@ -25,8 +25,12 @@ def generate_inference_data(
         for persona in personas:
             logger.info(f"Current persona: {persona}")
             prompt = prompt_creator.create_prompt(
-                prompt=data_point["text"], persona=persona, domain=data_point["Domain"]
+                prompt=data_point["text"],
+                persona=persona,
+                domain=data_point["Domain"],
+                version=2,
             )
+            # print(prompt)
             model_response = model.create_response(prompt)
             # model_response = {
             #     "content": "আপনি কি ভালো আছেন?",
@@ -66,7 +70,7 @@ if __name__ == "__main__":
         data_handler=data_handler,
         prompt_creator=message_creator,
         model=model,
-        total=1,
+        total=-1,
         calcualate_cost=True,
     )
 

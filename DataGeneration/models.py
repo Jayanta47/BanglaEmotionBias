@@ -16,6 +16,7 @@ class Model(ABC):
     def calculate_cost(self, input_tokens, output_tokens):
         pass
 
+
 class ChatgptModel(Model):
     def __init__(self, model_name) -> None:
         super().__init__()
