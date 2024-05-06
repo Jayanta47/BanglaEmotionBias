@@ -26,7 +26,10 @@ def generate_inference_data(
         for persona in personas:
             logger.info(f"Current persona: {persona}")
             prompt = prompt_creator.create_prompt(
-                prompt=data_point["text"], persona=persona, domain=data_point["Domain"]
+                prompt=data_point["text"],
+                persona=persona,
+                domain=data_point["Domain"],
+                version=2,
             )
             try:
                 model_response = model.create_response(prompt)
