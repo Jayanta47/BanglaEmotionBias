@@ -4,3 +4,9 @@ Data/*
 /DataGeneration/.env
 links.txt
 /DataGeneration/hf_token.txt
+/GraphGeneration/*.svg
+/GraphGeneration/*.pdf
+/GraphGeneration/*.pkl
+/GraphGeneration/*.png
+/GraphGeneration/*.txt
+/GraphGeneration/*.csv
