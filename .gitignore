@@ -10,3 +10,5 @@ links.txt
 /GraphGeneration/*.png
 /GraphGeneration/*.txt
 /GraphGeneration/*.csv
+/DataGeneration/hf_token.txt
+links.txt
