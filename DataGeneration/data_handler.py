@@ -21,6 +21,10 @@ class DataHandlerBase(ABC):
         pass
 
     @abstractmethod
+    def get_prompt_version(self):
+        pass
+
+    @abstractmethod
     def return_data_point(self, total=-1):
         pass
 
@@ -79,6 +83,9 @@ class DataHandler(DataHandlerBase):
 
     def get_personas(self):
         return persona
+
+    def get_prompt_version(self):
+        return self.config["prompt_version"]
 
     def return_data_point(self, total=-1):
         valid_data_points = self.__create_valid_data_points()
